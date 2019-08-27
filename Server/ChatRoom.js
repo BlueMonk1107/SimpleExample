@@ -1,15 +1,17 @@
 
+require("./Keys");
+
 global.InitChatRoom = function(socket)
 {
-    socket.on('chat', function (data) {
+    socket.on(Keys.Chat, function (data) {
         //console.log("SocketProtocol.Chat:"+data);
 
         var chatContent ={};
-        chatContent.id      = socket.id;
+        chatContent.id      = data.id;
         chatContent.chatMessage  = data.chatMessage;
 
         console.log("chatContent.toJSON():"+JSON.stringify(chatContent));
-        socket.emit('chat',chatContent);//All SocketUsers
-        //socket.broadcast.emit(data);//All SocketUsers But Self
+        //socket.emit(Keys.ReceiveChat,chatContent);//All SocketUsers
+        socket.broadcast.emit(Keys.ReceiveChat,chatContent);//All SocketUsers But Self
     });
 };

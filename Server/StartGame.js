@@ -21,22 +21,26 @@ global.InitStartGame = function (socket,playerId)
     };
 
     socket.on(Keys.InitGameComplete,function (data){
+        console.log("InitGameComplete");
         InitChatRoom(socket);
        
         players[playerId] = player;
     
         socket.emit('register', {id:playerId});
-        socket.emit('spawn', {id:playerId});
+        //socket.emit('spawn', player);
+        socket.broadcast.emit('spawn', player);
         socket.broadcast.emit('requestPosition');
-        
+
         for(var id in players){
+            console.log(id);
             if(id == playerId)
                 continue;
-            socket.emit('spawn', players[playerId]);
+            socket.emit('spawn', players[id]);
         };
     });
     
     socket.on('move', function (data) {
+        console.log(data.id);
         data.id = playerId;
         console.log('client moved', JSON.stringify(data));
         
@@ -60,7 +64,7 @@ global.InitStartGame = function (socket,playerId)
         
         delete data.d;
         
-        socket.emit('move', data);
+        socket.broadcast.emit('move', data);
     });
     
      socket.on('follow', function (data) {

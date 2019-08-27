@@ -3,6 +3,7 @@ var keys = {
     Login:"login",
     InitGameComplete:"initGameComplete",
     Chat:"chat",
+    ReceiveChat:"receiveChat",
     Disconnect:"disconnect",
     Spawn:"spawn",
     Move:"move",
