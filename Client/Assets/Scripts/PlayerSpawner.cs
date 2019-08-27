@@ -11,7 +11,7 @@ public class PlayerSpawner
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = new PlayerSpawner();
             }
@@ -26,17 +26,17 @@ public class PlayerSpawner
     {
         GameObject prefab = Resources.Load<GameObject>("Prefab/Player");
         var player = UnityEngine.Object.Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+        InitPlayer(player, id);
         AddPlayer(id, player);
-        InitPlayer(player,id);
         return player;
     }
 
-    private void InitPlayer(GameObject player,string id)
+    private void InitPlayer(GameObject player, string id)
     {
         player.AddComponent<NetworkEntity>().id = id;
         player.AddComponent<Follower>();
         player.AddComponent<Targeter>();
-         player.AddComponent<ClickToFollow>();
+        player.AddComponent<ClickToFollow>();
         player.AddComponent<Attacker>();
         player.AddComponent<Hittable>();
         player.AddComponent<Navigator>();

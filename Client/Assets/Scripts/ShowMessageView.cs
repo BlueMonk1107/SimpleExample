@@ -16,12 +16,12 @@ public class ShowMessageView : ViewBase
 
     protected override void AddEventListener()
     {
-        NetworkMgr.Instance.AddListener(Keys.Chat, ShowMessage);
+        NetworkMgr.Instance.AddListener(Keys.ReceiveChat, ShowMessage);
     }
 
     protected override void RemoveEventListener()
     {
-        NetworkMgr.Instance.RemoveListener(Keys.Chat, ShowMessage);
+        NetworkMgr.Instance.RemoveListener(Keys.ReceiveChat, ShowMessage);
     }
 
     private void ShowMessage(SocketIOEvent data)

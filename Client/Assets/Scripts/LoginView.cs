@@ -38,7 +38,7 @@ public class LoginView : ViewBase
 		 JsonData jsonData = JsonMapper.ToObject(data.data.ToString());
 		 PlayerData.ID = jsonData["id"].ToString();
 		Debug.Log(jsonData["chatMessage"]);
-		SceneManager.LoadScene("Game");
+		SceneManager.LoadSceneAsync("Game");
 	}
 
 	

@@ -4,12 +4,21 @@ using SocketIO;
 using UnityEngine;
 
 public class UpdatePosition : ViewBase {
-	private NetworkEntity _entity;
+        private Navigator _navigator;
+    private string _selfId;
  	// Use this for initialization
     void Start () {
-		 _entity = GetComponent<NetworkEntity>();
+           _selfId = GetComponent<NetworkEntity>().id;
+         _navigator = transform.GetComponent<Navigator>();
 	}
 
+    private void Update()
+    {
+        // if(_navigator.GetRemainingDistance()>0.01f)
+        // {
+        //     OnRequestPosition();
+        // }
+    }
     protected override void AddEventListener()
     {
         NetworkMgr.Instance.AddListener(Keys.UpdatePosition,OnUpdatePosition);
@@ -22,14 +31,17 @@ public class UpdatePosition : ViewBase {
 
     private void OnUpdatePosition(SocketIOEvent obj)
     {
+        Debug.Log("OnUpdatePosition  "+obj.data["id"]);
+        if(_selfId == obj.data["id"].ToString())
+            return;
+
         var position = Util.GetVectorFromJson(obj);
         var player = PlayerSpawner.Instance.GetPlayer(obj.data["id"].ToString());
         player.transform.position = position;
     }
 
-    private void OnRequestPosition(SocketIOEvent obj)
+    private void OnRequestPosition()
     {
-		GameObject player = PlayerSpawner.Instance.GetPlayer(_entity.id);
-        NetworkMgr.Instance.Emit("updatePosition", Util.VectorToJson(player.transform.position));
+        NetworkMgr.Instance.Emit(Keys.UpdatePosition, Util.VectorToJson(transform.position));
     }
 }

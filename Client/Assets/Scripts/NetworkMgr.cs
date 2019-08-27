@@ -37,13 +37,13 @@ public class NetworkMgr : MonoBehaviour {
 
 	private void Connect(SocketIOEvent data)
 	{
-		Debug.Log("Connect success");
+		Debug.Log("Connect success"+data);
 	}
 
     private void OnDisconnected(SocketIOEvent obj)
     {
-		Debug.Log("Disconnected");
         var disconnectedId = obj.data["id"].ToString();
+		Debug.Log("Disconnected id:"+disconnectedId);
         PlayerSpawner.Instance.RemovePlayer(disconnectedId);
     }
 
