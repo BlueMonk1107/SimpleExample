@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEntity
+public interface IEntity<T> where T: IComponent
 {
-    IList<IComponent> Components { get; }
-
-    void AddComponent(IComponent component);
-    void RemoveComponent(IComponent component);
+    int ID { get; }
+    void AddComponent<T>();
+    void RemoveComponent(T component);
+    bool HasComponent<T>();
 }

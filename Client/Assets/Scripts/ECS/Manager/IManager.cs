@@ -3,5 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IManager  {
-    void AddSystem(ISystem system);
+   void Init();
+   void Update();
 }
