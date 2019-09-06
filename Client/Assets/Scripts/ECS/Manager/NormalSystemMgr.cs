@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SystemMgrBase : IManager
+public class NormalSystemMgr : INormalSystemMgr
 {
     private HashSet<IInitSystem> _initSystems;
     private HashSet<IUpdateSystem> _updateSystems;
@@ -23,20 +23,13 @@ public abstract class SystemMgrBase : IManager
         }
     }
 
-    protected virtual void AddInitSystem(IInitSystem system)
+    public void AddInitSystem(IInitSystem system)
     {
         _initSystems.Add(system);
     }
-
-    protected virtual void AddLogicSystem(ILogicSystem system)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected virtual void AddUpdateSystem(IUpdateSystem system)
+    
+    public void AddUpdateSystem(IUpdateSystem system)
     {
         _updateSystems.Add(system);
     }
-
-
 }

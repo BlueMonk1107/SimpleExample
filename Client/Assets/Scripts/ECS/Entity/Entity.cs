@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Entity<T> : IEntity<T>  where T: IComponent
+public class Entity : IEntity 
 {
-    private Dictionary<string,IComponent> _components = new Dictionary<string,IComponent>();
+    private Dictionary<Type,IComponent> _components = new Dictionary<Type,IComponent>();
     private int _idCounter = -1;
     private int _id = -1;
     public int ID
@@ -18,18 +19,39 @@ public class Entity<T> : IEntity<T>  where T: IComponent
         }
     }
 
-    public void AddComponent<T>()
+    public void AddComponent<T>() where T: IComponent,new()
     {
-        
+        T t = new T();
+        if (!_components.ContainsKey(t.GetType()))
+        {
+            _components.Add(t.GetType(),t);
+        }
     }
 
-    public bool HasComponent<T>()
+    public bool HasComponent(Type type)
     {
-        throw new System.NotImplementedException();
+        return _components.ContainsKey(type);
     }
 
-    public void RemoveComponent(T component)
+    public T GetComponent<T>() where T: class,IComponent
     {
-        throw new System.NotImplementedException();
+        Type type = typeof(T);
+        if (_components.ContainsKey(type))
+        {
+            return _components[type] as T;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void RemoveComponent<T>(T component) where T: IComponent
+    {
+        Type type = typeof(T);
+        if (_components.ContainsKey(type))
+        {
+            _components.Remove(type);
+        }
     }
 }
