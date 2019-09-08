@@ -40,7 +40,7 @@ public class PlayerSpawner
         player.AddComponent<Attacker>();
         player.AddComponent<Hittable>();
         player.AddComponent<Navigator>();
-        player.AddComponent<Move>();
+        player.AddComponent<PlayerView>().Init(id);
         player.AddComponent<UpdatePosition>();
     }
 

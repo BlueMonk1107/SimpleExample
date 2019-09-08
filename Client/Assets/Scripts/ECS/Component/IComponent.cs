@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IComponent {
-    
+public interface IComponent
+{
+    bool ValueChanged { get; set; }
 }

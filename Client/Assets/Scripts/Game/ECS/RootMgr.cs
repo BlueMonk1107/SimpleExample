@@ -19,6 +19,7 @@ public class RootMgr : RootManagerBase
 
 	protected override void InitSystems()
 	{
-		throw new System.NotImplementedException();
+		AddLogicSystem(new MoveSystem());
+		AddLogicSystem(new MoveAniSystem());
 	}
 }

@@ -1,8 +1,15 @@
+using LitJson;
 using SocketIO;
 using UnityEngine;
 
 public class Util
 {
+    public static string GetId(SocketIOEvent obj)
+    {
+        JsonData json = JsonMapper.ToObject(obj.data.ToString());
+        return json["id"].ToString();
+    }
+    
     public static Vector3 GetVectorFromJson(SocketIOEvent obj)
     {
         return new Vector3(obj.data["x"].n, 0, obj.data["y"].n);
