@@ -18,14 +18,24 @@ public class Entity : IEntity
             return _id;
         }
     }
+    private Action<IEntity> _onChangeComponent;
 
-    public void AddComponent<T>() where T: IComponent,new()
+    public Entity(Action<IEntity> changeComponent)
+    {
+        _onChangeComponent = changeComponent;
+    }
+
+    public T AddComponent<T>() where T: IComponent,new()
     {
         T t = new T();
         if (!_components.ContainsKey(t.GetType()))
         {
             _components.Add(t.GetType(),t);
+            if (_onChangeComponent != null)
+                _onChangeComponent(this);
         }
+
+        return t;
     }
 
     public bool HasComponent(Type type)
@@ -52,6 +62,8 @@ public class Entity : IEntity
         if (_components.ContainsKey(type))
         {
             _components.Remove(type);
+            if (_onChangeComponent != null)
+                _onChangeComponent(this);
         }
     }
 }

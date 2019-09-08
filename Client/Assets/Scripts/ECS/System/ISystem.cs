@@ -14,7 +14,6 @@ public interface IInitSystem : ISystem {
 public interface ILogicSystem : ISystem
 {
     void AddEntity(IEntity entity);
-    bool ExecuteCondition();
     void Execute();
 }
 

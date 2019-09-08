@@ -16,14 +16,11 @@ public class LogicSystemMgr : ILogicSystemMgr
     {
         foreach (ILogicSystem system in _systems)
         {
-            if (system.ExecuteCondition())
-            {
-                system.Execute();
-            }
+            system.Execute();
         }
     }
 
-    public void CreateEntity(IEntity entity)
+    public void AddEntity(IEntity entity)
     {
         foreach (ILogicSystem system in _systems)
         {

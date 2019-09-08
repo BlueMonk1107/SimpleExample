@@ -11,7 +11,7 @@ public interface IManager  {
 public interface IEntityMgr : IManager
  {
     IEntity CreateEntity();
-    void AddCreateEntityListener(Action<IEntity> onAddEntity);
+    void ChangeComponentListener(Action<IEntity> onAddEntity);
  }
 
 public interface INormalSystemMgr : IManager
@@ -22,6 +22,6 @@ public interface INormalSystemMgr : IManager
 
 public interface ILogicSystemMgr : IManager
 {
-    void CreateEntity(IEntity entity);
+    void AddEntity(IEntity entity);
     void AddLogicSystem(ILogicSystem system);
 }

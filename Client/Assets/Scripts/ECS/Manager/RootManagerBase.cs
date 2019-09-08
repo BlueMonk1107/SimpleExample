@@ -17,7 +17,7 @@ public abstract class RootManagerBase : IManager
         _entityMgr =new EntityMgr();
         _entityMgr.Init();
         
-        _entityMgr.AddCreateEntityListener(_logicSystemMgr.CreateEntity);
+        _entityMgr.ChangeComponentListener(_logicSystemMgr.AddEntity);
         InitSystems();
     }
 

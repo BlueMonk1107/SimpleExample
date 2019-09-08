@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NormalSystemMgr : INormalSystemMgr
 {
-    private HashSet<IInitSystem> _initSystems;
-    private HashSet<IUpdateSystem> _updateSystems;
+    private HashSet<IInitSystem> _initSystems = new HashSet<IInitSystem>();
+    private HashSet<IUpdateSystem> _updateSystems = new HashSet<IUpdateSystem>();
 
     public void Init()
     {

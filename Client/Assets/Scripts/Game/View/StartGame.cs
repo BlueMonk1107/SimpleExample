@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SocketIO;
 using UnityEngine;
@@ -11,9 +12,15 @@ public class StartGame : ViewBase
         GameObject Prefab = Resources.Load<GameObject>("Prefab/ChatView");
         Instantiate(Prefab, transform);
 		NetworkMgr.Instance.Emit(Keys.InitGameComplete);
+        RootMgr.Instance.Init();
     }
 
-	private void Spawn(SocketIOEvent obj)
+    private void Update()
+    {
+        RootMgr.Instance.Update();
+    }
+
+    private void Spawn(SocketIOEvent obj)
     {
         Debug.Log("Spawn " + obj.data);
         var player = PlayerSpawner.Instance.SpawnPlayer(obj.data["id"].ToString());

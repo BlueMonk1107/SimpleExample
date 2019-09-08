@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class LogicSystemBase : ILogicSystem
 {
 
-	private HashSet<IEntity> _entities;
+	private HashSet<IEntity> _entities = new HashSet<IEntity>();
 	
 	public void AddEntity(IEntity entity)
 	{
@@ -14,13 +14,30 @@ public abstract class LogicSystemBase : ILogicSystem
 		{
 			_entities.Add(entity);
 		}
+		else
+		{
+			if (_entities.Contains(entity))
+			{
+				_entities.Remove(entity);
+			}
+		}
 	}
 
 	protected abstract Type[] Listener();
 
-	public abstract bool ExecuteCondition();
+	protected abstract bool ExecuteCondition(IEntity entity);
+	protected abstract void Execute(IEntity entity);
 
-	public abstract void Execute();
+	public void Execute()
+	{
+		foreach (IEntity entity in _entities)
+		{
+			if (ExecuteCondition(entity))
+			{
+				Execute(entity);
+			}
+		}
+	}
 
 	private bool JudgeListener(IEntity entity)
 	{
