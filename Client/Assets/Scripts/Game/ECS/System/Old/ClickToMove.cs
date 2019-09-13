@@ -2,10 +2,8 @@
 
 public class ClickToMove : MonoBehaviour, IClickable
 {
-    private Navigator playerNavigator;
 	void Start ()
 	{
-	    playerNavigator = transform.GetComponent<Navigator>();
 	}
 
     public void OnClick(RaycastHit hit)

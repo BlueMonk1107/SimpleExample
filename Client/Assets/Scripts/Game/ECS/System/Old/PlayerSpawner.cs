@@ -39,7 +39,6 @@ public class PlayerSpawner
         player.AddComponent<ClickToFollow>();
         player.AddComponent<Attacker>();
         player.AddComponent<Hittable>();
-        player.AddComponent<Navigator>();
         player.AddComponent<PlayerView>().Init(id);
         player.AddComponent<UpdatePosition>();
     }

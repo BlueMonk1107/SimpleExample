@@ -4,12 +4,12 @@ using SocketIO;
 using UnityEngine;
 
 public class UpdatePosition : ViewBase {
-        private Navigator _navigator;
+    
     private string _selfId;
  	// Use this for initialization
     void Start () {
            _selfId = GetComponent<NetworkEntity>().id;
-         _navigator = transform.GetComponent<Navigator>();
+           
 	}
 
     private void Update()

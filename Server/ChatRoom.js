@@ -1,5 +1,5 @@
 
-require("./Keys");
+//require("./Keys");
 
 global.InitChatRoom = function(socket)
 {

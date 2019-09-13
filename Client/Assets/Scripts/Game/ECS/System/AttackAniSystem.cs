@@ -21,5 +21,6 @@ public class AttackAniSystem : LogicSystemBase {
 		var animator = entity.GetComponent<PlayerComponent>().Animator;
 		var attack = entity.GetComponent<AniComponent>().Attack;
 		animator.SetBool ("Attack", attack);
+		entity.GetComponent<AniComponent>().ValueChanged = false;
 	}
 }

@@ -28,8 +28,8 @@ public class StartGame : ViewBase
         if (obj.data["x"])
         {
             var movePosition = Util.GetVectorFromJson(obj);
-            var navPos = player.GetComponent<Navigator>();
-            navPos.NavigateTo(movePosition);
+//            var navPos = player.GetComponent<Navigator>();
+//            navPos.NavigateTo(movePosition);
         }
     }
 

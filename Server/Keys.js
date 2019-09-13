@@ -12,4 +12,6 @@ var keys = {
     Attack:"attack"
 };
 
+var ss = 10;
+
 global.Keys = keys;

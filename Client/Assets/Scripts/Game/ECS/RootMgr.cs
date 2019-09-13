@@ -21,5 +21,6 @@ public class RootMgr : RootManagerBase
 	{
 		AddLogicSystem(new MoveSystem());
 		AddLogicSystem(new MoveAniSystem());
+		AddLogicSystem(new AttackAniSystem());
 	}
 }

@@ -18,9 +18,11 @@ public class MoveSystem : LogicSystemBase {
     protected override void Execute(IEntity entity)
     {
         Vector3 position = entity.GetComponent<MoveComponent>().Target;
-        Transform transform = entity.GetComponent<PlayerComponent>().Player;
-        var _navigator = transform.GetComponent<Navigator>();
-        _navigator.NavigateTo(position);
+        var agent = entity.GetComponent<PlayerComponent>().Agent;
+        agent.SetDestination(position);
+        AniComponent ani = entity.GetComponent<AniComponent>();
+        ani.Attack = false;
+        ani.ValueChanged = true;
         entity.GetComponent<MoveComponent>().ValueChanged = false;
     }
 }

@@ -1,2 +1,7 @@
 /Client/.vscode
 /Client/.vs
+/Client/.idea
+/Client/Assets/Plugins/Editor.meta
+/Client/Assets/Plugins/Editor/JetBrains.meta
+/Client/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll
+/Client/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll.meta
