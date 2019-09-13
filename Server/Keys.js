@@ -5,13 +5,12 @@ var keys = {
     Chat:"chat",
     ReceiveChat:"receiveChat",
     Disconnect:"disconnect",
+    OtherDisconnect : "otherDisconnect",
     Spawn:"spawn",
     Move:"move",
     Follow:"follow",
     UpdatePosition:"updatePosition",
     Attack:"attack"
 };
-
-var ss = 10;
 
 global.Keys = keys;

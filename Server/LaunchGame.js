@@ -1,12 +1,11 @@
-var port = process.env.PORT || 3000;
-var io = require('socket.io')(port);
-//require("./Keys");
-require("./Login");
+var io = require('socket.io')(3000);
+var login = require('./Login');
+require("./Keys");
 
-console.log("Server started on port " + port);
-
-io.on(Keys.Connection, function (socket) {
-    console.log("client connect");
-    socket.emit(Keys.Connection);
-    InitLogin(socket);
+console.log("Start Server");
+io.on(Keys.Connection,function(socket)
+{
+    console.log("client connection");
+    login.InitLogin(socket);
+    socket.emit("connection");
 });

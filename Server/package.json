@@ -1,17 +1,15 @@
 {
-  "name": "node-js-server",
-  "version": "0.0.1",
-  "description": "Server for game",
-  "engines": {
-    "node": "4.4.4"
-  },
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
   "main": "LaunchGame.js",
-  "scripts": {
-    "start": "node LaunchGame.js"
-  },
   "dependencies": {
-    "express": "4.13.4",
-    "shortid": "2.2.6",
-    "socket.io": "^1.4.6"
-  }
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

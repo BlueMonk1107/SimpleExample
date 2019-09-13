@@ -1,26 +1,34 @@
 
-require("./StartGame");
-require("./Keys");
-var socketArray = {};
+var startGame = require("./StartGame");
 
-global.InitLogin = function (socket) {
-    console.log("login init");
-    
+var testAccount = [{ id: "111", password: "111" }, { id: "222", password: "222" }];
+
+module.exports.InitLogin = function (socket) {
+    console.log("Init Login");
     socket.on(Keys.Login, function (data) {
-        //这里修改了id，导致客户端自己也能收到广播消息
-        socket.id = data.id;
-        socket.loginPassword = data.loginPassword;
-        // if (!socketArray.hasOwnProperty(socket.guid)) {
-        //     socketArray[socket.guid] = data;
-        // }
-        //
-        //console.log(socketArray);
-        var chatContent = {};
-        chatContent.id = socket.id;
-        chatContent.chatMessage = "Login Scuess";
-        console.log(socket);
-        socket.emit(Keys.Login, chatContent);
-        console.log("Login Scuess id:"+data.id);
-        InitStartGame(socket, data.id);
-    })
+        console.log(data.id);
+        var result = {};
+        result.id = data.id;
+        result.result = CheckAccount(data);
+        socket.emit(Keys.Login, result);
+
+        if(result.result == true)
+        {
+            startGame.InitStartGame(socket,data.id);
+        }
+    });
+};
+
+
+function CheckAccount(data) {
+
+    var result = false;
+    testAccount.forEach(function (item) {
+        if(item.id == data.id && item.password == data.password)
+        {
+            result = true;
+        }
+    });
+
+    return result;
 }

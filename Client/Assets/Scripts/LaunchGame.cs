@@ -5,15 +5,23 @@ using UnityEngine;
 public class LaunchGame : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		Spawn("Prefab/NetworkMgr");
-		Spawn("Prefab/LoginView",transform);
-		
+	void Start ()
+	{
+		InitNetworkMgr();
+		InitLoginView();
 	}
 
-	private GameObject Spawn(string path,Transform parent = null)
+	private void InitNetworkMgr()
 	{
-		GameObject temp = Resources.Load<GameObject>(path);
-		return Instantiate(temp,parent);
+		GameObject mgr = new GameObject("NetworkMgr");
+		mgr.AddComponent<NetworkMgr>();
+		mgr.AddComponent<ConnetView>();
+	}
+
+	private void InitLoginView()
+	{
+		GameObject prefab = Resources.Load<GameObject>(Paths.LoginView);
+		GameObject view = Instantiate(prefab, transform);
+		view.AddComponent<LoginView>();
 	}
 }

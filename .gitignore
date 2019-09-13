@@ -5,3 +5,9 @@
 /Client/Assets/Plugins/Editor/JetBrains.meta
 /Client/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll
 /Client/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll.meta
+/Client/Library
+/Client/obj
+/Client/Assembly-CSharp-Editor.csproj
+/Client/Client.sln
+/Client/Assembly-CSharp.csproj
+/Server/.vscode

@@ -1,105 +1,40 @@
-require("./ChatRoom");
+var chatRoom = require('./ChatRoom');
 
-var players = {};
-var playerSpeed = 5;
+let players = {};
 
-global.InitStartGame = function (socket, playerId) {
-    console.log("InitStartGame");
+module.exports.InitStartGame = function (socket, playerId) {
 
-    var player = {
-        id: playerId,
-        destination: {
-            x: 0,
-            y: 0
-        },
-        lastPosition: {
-            x: 0,
-            y: 0
-        },
-        lastMoveTime: 0
-    };
+    let player = {id:playerId,postion:{x:0,y:0,z:0},rotation:{x:0,y:0,z:0}};
 
     socket.on(Keys.InitGameComplete, function (data) {
-        console.log("InitGameComplete");
-        InitChatRoom(socket);
+        console.log("Init StartGame");
 
+        chatRoom.InitChatRoom(socket);
+
+        
         players[playerId] = player;
+        //生成本客户端的所有对象
+        for(let id in players)
+        {
+            socket.emit(Keys.Spawn,players[id]);
+        }
+        //通知其他客户端，生成本客户端的对象
+        socket.broadcast.emit(Keys.Spawn, player);
+    })
 
-        socket.emit('register', { id: playerId });
-        //socket.emit('spawn', player);
-        socket.broadcast.emit('spawn', player);
-        socket.broadcast.emit('requestPosition');
+    socket.on(Keys.Move,function(data)
+    {
+        player.postion.x= data.startPos.x;
+        player.postion.y= data.startPos.y;
+        player.postion.z= data.startPos.z;
 
-        for (var id in players) {
-            console.log(id);
-            if (id == playerId)
-                continue;
-            socket.emit('spawn', players[id]);
-        };
-    });
+        socket.emit(Keys.Move,data);
+        socket.broadcast.emit(Keys.Move,data);
+    })
 
-    socket.on('move', function (data) {
-        console.log(data.id);
-        data.id = playerId;
-        console.log('client moved', JSON.stringify(data));
-
-        player.destination.x = data.d.x;
-        player.destination.y = data.d.y;
-
-        var elapsedTime = Date.now() - player.lastMoveTime;
-
-        var travelDistanceLimit = elapsedTime * playerSpeed / 1000;
-
-        var requestedDistanceTraveled = lineDistance(player.lastPosition, data.c);
-
-        player.lastMoveTime = Date.now();
-
-        player.lastPosition = data.c;
-
-        delete data.c;
-
-        data.x = data.d.x;
-        data.y = data.d.y;
-
-        delete data.d;
-
-        socket.broadcast.emit('move', data);
-    });
-
-    socket.on('follow', function (data) {
-        data.id = playerId;
-        console.log("follow request: ", data);
-        socket.broadcast.emit('follow', data);
-    });
-
-    socket.on('updatePosition', function (data) {
-        console.log("update position: ", data);
-        data.id = playerId;
-        socket.broadcast.emit('updatePosition', data);
-    });
-
-    socket.on('attack', function (data) {
-        console.log("attack request: ", data);
-        data.id = playerId;
-        io.emit('attack', data);
-    });
-
-    socket.on('disconnect', function () {
-        console.log('client disconected');
+    socket.on(Keys.Disconnect,function(data)
+    {
         delete players[playerId];
-        socket.broadcast.emit('disconnected', { id: playerId });
-    });
-}
-
-function lineDistance(vectorA, vectorB) {
-    var xs = 0;
-    var ys = 0;
-
-    xs = vectorB.x - vectorA.x;
-    xs = xs * xs;
-
-    ys = vectorB.y - vectorA.y;
-    ys = ys * ys;
-
-    return Math.sqrt(xs + ys);
-}
+        socket.broadcast.emit(Keys.OtherDisconnect,{id:playerId});
+    })
+};

@@ -1,3 +1,6 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Keys
 {
@@ -7,6 +10,7 @@ public class Keys
     public static readonly string Chat = "chat";
     public static readonly string ReceiveChat = "receiveChat";
     public static readonly string Disconnect = "disconnect";
+    public static readonly string OtherDisconnect = "otherDisconnect";
     public static readonly string Spawn = "spawn";
     public static readonly string Move = "move";
     public static readonly string Follow = "follow";
