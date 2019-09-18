@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SocketIO;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class StartGameView : ViewBase {
 		NetworkMgr.Instance.Emit(Keys.InitGameComplete);
 		
 		Camera.main.gameObject.AddComponent<Click>();
+		RootMgr.Instance.Init();
+	}
+
+	private void Update()
+	{
+		RootMgr.Instance.Update();
 	}
 
 	protected override void AddEventListener()

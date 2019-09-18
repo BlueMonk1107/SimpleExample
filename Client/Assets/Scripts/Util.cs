@@ -34,7 +34,6 @@ public class Util  {
     
     public static Vector3 JsonToVector(JSONObject json)
     {
-        Debug.Log(json.ToString());
         return new Vector3(json["x"].f,json["y"].f,json["z"].f);
     }
 
