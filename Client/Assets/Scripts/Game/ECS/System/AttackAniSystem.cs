@@ -13,7 +13,7 @@ public class AttackAniSystem : LogicSystemBase {
 	protected override bool ExecuteCondition(IEntity entity)
 	{
 		return entity.GetComponent<PlayerComponent>().Animator != null
-		       && entity.GetComponent<AniComponent>().ValueChanged;
+		       && entity.GetComponent<AniComponent>().ValueChanged();
 	}
 
 	protected override void Execute(IEntity entity)
@@ -21,6 +21,5 @@ public class AttackAniSystem : LogicSystemBase {
 		var animator = entity.GetComponent<PlayerComponent>().Animator;
 		var attack = entity.GetComponent<AniComponent>().Attack;
 		animator.SetBool ("Attack", attack);
-		entity.GetComponent<AniComponent>().ValueChanged = false;
 	}
 }

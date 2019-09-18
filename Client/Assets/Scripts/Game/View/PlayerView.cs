@@ -36,6 +36,5 @@ public class PlayerView : ViewBase
         var move = _entity.GetComponent<MoveComponent>();
         move.ID = Util.GetId(obj);
         move.Target = position;
-        move.ValueChanged = true;
     }
 }

@@ -7,16 +7,14 @@ public abstract class RootManagerBase : IManager
     private INormalSystemMgr _normalSystemMgr;
     private ILogicSystemMgr _logicSystemMgr;
     private IEntityMgr _entityMgr;
-    
+
     public void Init()
     {
         _normalSystemMgr = new NormalSystemMgr();
         _normalSystemMgr.Init();
         _logicSystemMgr = new LogicSystemMgr();
-        _logicSystemMgr.Init();
-        _entityMgr =new EntityMgr();
-        _entityMgr.Init();
-        
+        _entityMgr = new EntityMgr();
+
         _entityMgr.ChangeComponentListener(_logicSystemMgr.AddEntity);
         InitSystems();
     }
@@ -25,7 +23,6 @@ public abstract class RootManagerBase : IManager
     {
         _normalSystemMgr.Update();
         _logicSystemMgr.Update();
-        _entityMgr.Update();
     }
 
     public IEntity CreateEntity()
@@ -34,7 +31,7 @@ public abstract class RootManagerBase : IManager
     }
 
     protected abstract void InitSystems();
-    
+
     protected virtual void AddInitSystem(IInitSystem system)
     {
         _normalSystemMgr.AddInitSystem(system);

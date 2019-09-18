@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IComponent
 {
-    bool ValueChanged { get; set; }
+    //bool ValueChanged ();
 }

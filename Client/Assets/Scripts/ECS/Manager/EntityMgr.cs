@@ -8,14 +8,6 @@ public class EntityMgr : IEntityMgr
     private Dictionary<int, IEntity> _entities = new Dictionary<int, IEntity>();
     private Action<IEntity> _onChangeComponent;
     
-    public void Init()
-    {
-    }
-
-    public void Update()
-    {
-    }
-
     public IEntity CreateEntity()
     {
         IEntity entity = new Entity(_onChangeComponent);

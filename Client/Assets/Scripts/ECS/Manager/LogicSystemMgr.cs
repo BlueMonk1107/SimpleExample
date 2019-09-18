@@ -8,10 +8,6 @@ public class LogicSystemMgr : ILogicSystemMgr
 
     private HashSet<ILogicSystem> _systems = new HashSet<ILogicSystem>();
     
-    public void Init()
-    {
-    }
-
     public void Update()
     {
         foreach (ILogicSystem system in _systems)

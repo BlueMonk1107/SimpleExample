@@ -8,7 +8,6 @@ public class LaunchGame : MonoBehaviour {
 	void Start () {
 		Spawn("Prefab/NetworkMgr");
 		Spawn("Prefab/LoginView",transform);
-		
 	}
 
 	private GameObject Spawn(string path,Transform parent = null)
