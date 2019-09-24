@@ -36,6 +36,5 @@ public class PlayerView : ViewBase
         move.ID = Util.GetId(data);
         move.StartPos = Util.JsonToVector(data.data["startPos"]);
         move.TargetPos = Util.JsonToVector(data.data["targetPos"]);
-        move.ValueChanged = true;
     }
 }
